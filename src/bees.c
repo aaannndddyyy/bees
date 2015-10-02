@@ -39,152 +39,152 @@ void bee_init(unsigned int ID, agent_bee * bee, agent_hive * hive)
     bee->physics[PHYSICS_ENERGY]=1000;
 }
 
-void bee_forage(agent_bee * bee)
+void bee_behavior_forage(agent_bee * bee)
 {
 }
 
-void bee_grow(agent_bee * bee)
+void bee_behavior_grow(agent_bee * bee)
 {
 }
 
-void bee_guard(agent_bee * bee)
+void bee_behavior_guard(agent_bee * bee)
 {
 }
 
-void bee_robber(agent_bee * bee)
+void bee_behavior_robber(agent_bee * bee)
 {
 }
 
-void bee_fanning(agent_bee * bee)
+void bee_behavior_fanning(agent_bee * bee)
 {
 }
 
-void bee_heating(agent_bee * bee)
+void bee_behavior_heating(agent_bee * bee)
 {
 }
 
-void bee_laying(agent_bee * bee)
+void bee_behavior_laying(agent_bee * bee)
 {
 }
 
-void bee_capping(agent_bee * bee)
+void bee_behavior_capping(agent_bee * bee)
 {
 }
 
-void bee_mating(agent_bee * bee)
+void bee_behavior_mating(agent_bee * bee)
 {
 }
 
-void bee_cleaning(agent_bee * bee)
+void bee_behavior_cleaning(agent_bee * bee)
 {
 }
 
-void bee_polishing(agent_bee * bee)
+void bee_behavior_polishing(agent_bee * bee)
 {
 }
 
-void bee_undertaking(agent_bee * bee)
+void bee_behavior_undertaking(agent_bee * bee)
 {
 }
 
-void bee_grooming(agent_bee * bee)
+void bee_behavior_grooming(agent_bee * bee)
 {
 }
 
-void bee_retinue(agent_bee * bee)
+void bee_behavior_retinue(agent_bee * bee)
 {
 }
 
-void bee_balling(agent_bee * bee)
+void bee_behavior_balling(agent_bee * bee)
 {
 }
 
-void bee_resting(agent_bee * bee)
+void bee_behavior_resting(agent_bee * bee)
 {
 }
 
-void bee_dancing(agent_bee * bee)
+void bee_behavior_dancing(agent_bee * bee)
 {
 }
 
-void bee_nursing(agent_bee * bee)
+void bee_behavior_nursing(agent_bee * bee)
 {
 }
 
-void bee_update(agent_bee * bee)
+void bee_cycle(agent_bee * bee)
 {
     switch (bee->state)
     {
     case BEE_STATE_LAVA: {
-        bee_grow(bee);
+        bee_behavior_grow(bee);
         break;
     }
     case BEE_STATE_FORAGE: {
-        bee_forage(bee);
+        bee_behavior_forage(bee);
         break;
     }
     case BEE_STATE_FANNING: {
-        bee_fanning(bee);
+        bee_behavior_fanning(bee);
         break;
     }
     case BEE_STATE_HEATING: {
-        bee_heating(bee);
+        bee_behavior_heating(bee);
         break;
     }
     case BEE_STATE_GUARD: {
-        bee_guard(bee);
+        bee_behavior_guard(bee);
         break;
     }
     case BEE_STATE_ROBBER: {
-        bee_robber(bee);
+        bee_behavior_robber(bee);
         break;
     }
     case BEE_STATE_LAYING: {
-        bee_laying(bee);
+        bee_behavior_laying(bee);
         break;
     }
     case BEE_STATE_CAPPING: {
-        bee_capping(bee);
+        bee_behavior_capping(bee);
         break;
     }
     case BEE_STATE_MATING: {
-        bee_mating(bee);
+        bee_behavior_mating(bee);
         break;
     }
     case BEE_STATE_CLEANING: {
-        bee_cleaning(bee);
+        bee_behavior_cleaning(bee);
         break;
     }
     case BEE_STATE_POLISHING: {
-        bee_polishing(bee);
+        bee_behavior_polishing(bee);
         break;
     }
     case BEE_STATE_UNDERTAKING: {
-        bee_undertaking(bee);
+        bee_behavior_undertaking(bee);
         break;
     }
     case BEE_STATE_GROOMING: {
-        bee_grooming(bee);
+        bee_behavior_grooming(bee);
         break;
     }
     case BEE_STATE_BALLING: {
-        bee_balling(bee);
+        bee_behavior_balling(bee);
         break;
     }
     case BEE_STATE_RESTING: {
-        bee_resting(bee);
+        bee_behavior_resting(bee);
         break;
     }
     case BEE_STATE_DANCING: {
-        bee_dancing(bee);
+        bee_behavior_dancing(bee);
         break;
     }
     case BEE_STATE_RETINUE: {
-        bee_retinue(bee);
+        bee_behavior_retinue(bee);
         break;
     }
     case BEE_STATE_NURSING: {
-        bee_nursing(bee);
+        bee_behavior_nursing(bee);
         break;
     }
     }

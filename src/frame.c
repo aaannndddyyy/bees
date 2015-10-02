@@ -20,7 +20,7 @@
 
 #include "bees.h"
 
-/* removes a bee to a frame */
+/* removes a bee from a frame */
 void frame_remove(agent_bee * bee, agent_hive * hive, unsigned int frame)
 {
     agent_hive_frame * f = &hive->frame[frame];
@@ -44,6 +44,7 @@ void frame_remove(agent_bee * bee, agent_hive * hive, unsigned int frame)
     f->bees--;
 }
 
+/* adds a bee to a frame */
 void frame_add(agent_bee * bee, agent_hive * hive, unsigned int frame)
 {
     agent_hive_frame * f = &hive->frame[frame];
@@ -72,6 +73,7 @@ void frame_add(agent_bee * bee, agent_hive * hive, unsigned int frame)
     bee->pose.hive.heading=fmod(bee->pose.hive.heading+PI,PI);
 }
 
+/* distance between a bee and its target on a frame */
 double frame_dist_to_target(agent_bee * bee)
 {
     double dx = bee->target.hive.posn[POSITION_X] - bee->pose.hive.posn[POSITION_X];
@@ -79,6 +81,7 @@ double frame_dist_to_target(agent_bee * bee)
     return sqrt(dx*dx + dy*dy);
 }
 
+/* is the given point inside a bee? */
 unsigned int frame_point_inside_bee(double x, double y, agent_bee * bee)
 {
     double cosa=cos(bee->pose.hive.heading);
@@ -96,6 +99,7 @@ unsigned int frame_point_inside_bee(double x, double y, agent_bee * bee)
     return 0;
 }
 
+/* detect a collision with a given angular offset */
 unsigned int frame_detect_collision(agent_bee * bee, agent_hive * hive, double heading_offset)
 {
     double cx = bee->pose.hive.posn[POSITION_X];
@@ -119,6 +123,7 @@ unsigned int frame_detect_collision(agent_bee * bee, agent_hive * hive, double h
     return 0;
 }
 
+/* update the movement of a bee */
 unsigned int frame_move(agent_bee * bee, agent_hive * hive)
 {
     double dist = frame_dist_to_target(bee);
@@ -148,6 +153,7 @@ unsigned int frame_move(agent_bee * bee, agent_hive * hive)
     return 1;
 }
 
+/* navigate within the frames of a hive */
 void frame_navigate(agent_bee * bee, agent_hive * hive)
 {
     if (bee->frame_target != bee->frame) {

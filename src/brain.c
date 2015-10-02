@@ -21,6 +21,8 @@
 
 #include "bees.h"
 
+/* given an existing behavior state and a situation
+   move to a new behavior state */
 void brain_rule(unsigned int caste,
                 unsigned int current_state,
                 unsigned int current_location,
@@ -88,6 +90,7 @@ void brain_rule(unsigned int caste,
     }
 }
 
+/* apply a condition to a pair of values */
 unsigned int brain_condition(unsigned char value,
                              unsigned char value_compare,
                              unsigned char condition)
