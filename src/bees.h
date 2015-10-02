@@ -81,6 +81,7 @@ enum {
     BEE_STATE_LAYING,
     BEE_STATE_CAPPING,
     BEE_STATE_CLEANING,
+    BEE_STATE_BUILDING,
     BEE_STATE_POLISHING,
     BEE_STATE_UNDERTAKING,
     BEE_STATE_GROOMING,
@@ -263,8 +264,8 @@ typedef struct
     /* location */
     agent_environment_pose location;
 
-    /* total population per caste */
-    int population[3];
+    /* total population */
+    int population;
 
     /* hive physics */
     double physics[DIMENSION_PHYSICS];
@@ -276,11 +277,13 @@ typedef struct
 
 void run_tests();
 void frame_navigate(agent_bee * bee, agent_hive * hive);
-unsigned int brain_cycle(agent_bee * bee);
 void brain_init(agent_bee_brain * brain);
 void bee_init(unsigned int ID, agent_bee * bee, agent_hive * hive);
 void hive_init(agent_hive * hive, unsigned int population,
                double frame_width_mm, double frame_height_mm);
 void frame_add(agent_bee * bee, agent_hive * hive, unsigned int frame);
+unsigned int brain_cycle(agent_bee * bee);
+void hive_cycle(agent_hive * hive);
+void bee_cycle(agent_bee * bee);
 
 #endif

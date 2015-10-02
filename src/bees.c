@@ -24,19 +24,42 @@ http://www.dave-cushman.net/bee/behaviour.html
 
 void bee_init(unsigned int ID, agent_bee * bee, agent_hive * hive)
 {
-	bee->ID = ID;
-	bee->queen_ID = 0;
-	bee->caste = CASTE_WORKER;
-	brain_init(&bee->brain);
-	memset((void*)bee->vision,'\0',BRAIN_DIMENSION_VISION*sizeof(double));
+    unsigned int i;
+
+    bee->ID = ID;
+    bee->queen_ID = 0;
+    bee->caste = CASTE_WORKER;
+    brain_init(&bee->brain);
+    memset((void*)bee->vision,'\0',BRAIN_DIMENSION_VISION*sizeof(double));
+    for (i = 0; i < DIMENSION_PHYSICS; i++) bee->physics[i]=0;
     bee->physics[PHYSICS_TEMPERATURE] = 15;
-    bee->physics[PHYSICS_HUMIDITY]=0;
-    bee->physics[PHYSICS_PRESSURE]=0;
-	bee->physics[PHYSICS_VIBRATION]=0;
-	bee->physics[PHYSICS_TIME_OF_DAY]=0;
-	bee->physics[PHYSICS_TIME_OF_YEAR]=0;
-    bee->physics[PHYSICS_AGE_DAYS]=0;
     bee->physics[PHYSICS_ENERGY]=1000;
+    bee->frame=0;
+    bee->frame_target=0;
+    bee->cell[POSITION_X]=0;
+    bee->cell[POSITION_Y]=0;
+    bee->cell_target[POSITION_X]=0;
+    bee->cell_target[POSITION_Y]=0;
+    bee->location = LOCATION_FRAME;
+    bee->state=BEE_STATE_CLEANING;
+	bee->pose.environment.posn[POSITION_X]=0;
+	bee->pose.environment.posn[POSITION_Y]=0;
+	bee->pose.environment.heading=0;
+	bee->pose.environment.vel=0;
+	bee->pose.hive.posn[POSITION_X]=0;
+	bee->pose.hive.posn[POSITION_Y]=0;
+	bee->pose.hive.heading=0;
+	bee->pose.hive.vel=0;
+
+    for (i = 0; i < PAYLOADS; i++) bee->payload[i]=0;
+    for (i = 0; i < PHEROMONES; i++) {
+        bee->smell[i]=0;
+        bee->pheremone[i]=0;
+    }
+}
+
+void bee_behavior_building(agent_bee * bee)
+{
 }
 
 void bee_behavior_forage(agent_bee * bee)
@@ -113,8 +136,14 @@ void bee_behavior_nursing(agent_bee * bee)
 
 void bee_cycle(agent_bee * bee)
 {
+    brain_cycle(bee);
+
     switch (bee->state)
     {
+    case BEE_STATE_BUILDING: {
+        bee_behavior_building(bee);
+        break;
+    }
     case BEE_STATE_LAVA: {
         bee_behavior_grow(bee);
         break;
